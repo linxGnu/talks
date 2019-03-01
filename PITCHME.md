@@ -53,8 +53,10 @@ In-memory, In-Go
 
 - We still have  @color[red](Query) (many requests at a time)
 - @color[red](COW) is a good way to deal with @color[red](consistency)
+- Non-blocking
+- No data race, thread-safe
 
-<em>+ Share-nothing == Awesome</em><!-- .element: class="fragment fade-up" -->
+<em>COW + Share-nothing == Awesome</em><!-- .element: class="fragment fade-up" -->
 
 ---
 
