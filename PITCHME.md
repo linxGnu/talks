@@ -230,13 +230,13 @@ func acquireLockAndDoSomething() {
 
 ---
 
-###  @color[#607625](Replacing)
+###  @color[#607625](Experiment)
 
-- We create our own `int64` set based on: https://github.com/brentp/intintmap
+- We create our own @color[red](int64 set) based on: https://github.com/brentp/intintmap
 - We @color[red](manually) shards the map and apply @color[red](share-nothing) approach
 - 2-5x faster than `map`
 - Tiny alloc
-- We also see great improvement when using `int64 set + manual shard` compared to `sync.Map`
+- We also see great improvement when using @color[red](int64 set + manual shard) compared to @color[red](sync.Map)
 
 ---
 
@@ -287,9 +287,9 @@ BenchmarkMapsetLarge-8    	       1	2220622562 ns/op	403991096 B/op	  306845 all
 
 ---
 
-###  @color[#607625](context.Context)
+###  @color[#607625](context)
 
-- Powerful
+- @color[red](ctx context.Context) is powerful!
 - You know when `Done()` and stop your job
 - Binding value
 
@@ -314,7 +314,7 @@ func DoSomething(ctx context.Context) {
 
 ---
 
-###  @color[#607625](context.Context)
+###  @color[#607625](Context)
 
 - Understand what you are doing with @color[red](ctx)
 - Control its scope
@@ -371,4 +371,5 @@ sys	0m0.168s
 
 ---
 
-# Join us!!
+## Found interesting?
+### Join us!!
