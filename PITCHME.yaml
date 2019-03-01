@@ -1,0 +1,7 @@
+theme : black
+
+logo : assets/img/logo.png
+logo-postion : top-left
+
+title : "Efficient concurrency in Go"
+description : "Profiling and Optimization"
