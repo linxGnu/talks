@@ -1,7 +1,5 @@
 ### Efficient concurrency in Go
 
-<!-- .slide: data-transition="fade" -->
-
 Tran Tuan Linh @ LINE Corp
 
 linxGnu @ github
@@ -30,7 +28,7 @@ In-memory, In-Go
 - Awesome third-party libraries
 - Very nice **pprof** tooling
 
-<em>And of course, we love Go!</em><!-- .element: class="fragment fade-up" -->
+<em>And, WE love Go!</em><!-- .element: class="fragment fade-up" -->
 
 ---
 
@@ -62,7 +60,7 @@ In-memory, In-Go
 
 ### Single write - multiple read
 
-```
+```go
 // Thread safe multi reading
 data = storage.Load().([]byte)
 
@@ -95,7 +93,7 @@ storage.Store(data)                        // Save
 
 ---
 
-<img src="https://gyazo.linecorp.com/images/190226/a50019ba32e8f2cccb2f9182989cdffd.png" style="height:630px"/>
+<img src="https://gyazo.linecorp.com/images/190226/a50019ba32e8f2cccb2f9182989cdffd.png" style="height:600px"/>
 
 ---
 
@@ -118,11 +116,11 @@ storage.Store(data)                        // Save
 
 ---
 
-<img src="https://gyazo.linecorp.com/images/190228/77dd180f88867a55ddbd649dee8a1220.png" style="height:630px" />
+<img src="https://gyazo.linecorp.com/images/190228/77dd180f88867a55ddbd649dee8a1220.png" style="height:600px" />
 
 ---
 
-```
+```bash
 time go run chan.go 
 475070402
 
@@ -140,11 +138,11 @@ sys	1m24.319s
 
 ---
 
-<img src="https://gyazo.linecorp.com/images/190228/213a49a3f229d90bd5a99ca6133af84d.png" style="height:630px" />
+<img src="https://gyazo.linecorp.com/images/190228/213a49a3f229d90bd5a99ca6133af84d.png" style="height:600px" />
 
 ---
 
-```
+```bash
 time go run batch_chan.go 
 3094277120
 
@@ -160,7 +158,7 @@ sys	0m25.084s
 
 ---
 
-<img src="https://gyazo.linecorp.com/images/190228/6c050cfb005128d74d42e2e723d161c5.png" style="height:630px" />
+<img src="https://gyazo.linecorp.com/images/190228/6c050cfb005128d74d42e2e723d161c5.png" style="height:600px" />
 
 ---
 
@@ -171,20 +169,15 @@ sys	0m25.084s
 - Safe
 
 
-```
+```go
 // mutex way
-lock.Lock()
-core.Config = loadConfig()
-lock.Unlock()
 lock.RLock()
 c = core.Config
 lock.RUnlock()
 
 // atomic way
 var Config atomic.Value
-...
 core.Config.Store(loadConfig())
-...
 c = core.Config.Load().(*model.Config)
 ```
 
@@ -194,7 +187,7 @@ c = core.Config.Load().(*model.Config)
 
 But use it carefully or you will be spin-lock forever!
 
-```
+```go
 func acquireLockAndDoSomething() {
   for {
      if atomic.CompareAndSwapInt32(&state, 0, 1) {
@@ -245,16 +238,16 @@ func acquireLockAndDoSomething() {
 - Binding value
 - But be careful of context binding chain
 
-```
+```go
 ctx, cancel := context.WithTimeout(parentCtx, time.Second)
-...
+
 DoSomething(ctx)
-...
+
 func DoSomething(ctx context.Context) {
-    ...
+    // your code here
     time.Sleep(2 * time.Second)
     myCtx, cancel := ctx.WithCancel(ctx)
-    ..
+
     doOtherThing(myCtx) /* `myCtx` is cancelled 
                             due to timeout of `ctx` */
 }
@@ -278,11 +271,11 @@ Then you have an awesome friend!<!-- .element: class="fragment fade-up" -->
 
 ---
 
-<img src="https://gyazo.linecorp.com/images/190228/f16c841b9120fef8c5b7258c01c9c910.png" style="height:630px" />
+<img src="https://gyazo.linecorp.com/images/190228/f16c841b9120fef8c5b7258c01c9c910.png" style="height:600px" />
 
 ---
 
-```
+```bash
 go run race.go
 panic: runtime error: invalid memory address or nil pointer dereference
 [signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x1098e6a]
