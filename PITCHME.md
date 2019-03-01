@@ -6,7 +6,7 @@ linxGnu @ github
 
 ---
 
-## @color[#607625](Overview)
+## @color[#607625](Story)
 
 - Writing high intensive read/write metrics database
 - 40-80 Billion data points / day (and more)
@@ -99,7 +99,7 @@ storage.Store(data)                        // Save
 
 ---
 
-##  @color[#607625](So far)
+##  @color[#607625](Story - So far)
 
 - Go help us writing systems in very productivity
 - Just code -> `go run` -> `sleep well`
