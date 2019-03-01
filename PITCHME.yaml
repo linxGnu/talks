@@ -3,5 +3,7 @@ theme : black
 logo : logo_linego20190301.png
 logo-postion : top-left
 
+highlight : androidstudio
+
 title : "Efficient concurrency in Go"
 description : "Profiling and Optimization"
