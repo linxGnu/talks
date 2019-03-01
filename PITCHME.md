@@ -120,9 +120,10 @@ storage.Store(data)                        // Save
 
 ---
 
-```bash
-time go run chan.go 
-475070402
+```elm
+time go run chan.go
+
+Counter: 475070402
 
 real	2m0.705s
 user	5m18.062s
@@ -142,9 +143,10 @@ sys	1m24.319s
 
 ---
 
-```bash
-time go run batch_chan.go 
-3094277120
+```elm
+time go run batch_chan.go
+
+Counter: 3094277120
 
 real	2m0.706s
 user	2m42.327s
@@ -236,7 +238,10 @@ func acquireLockAndDoSomething() {
 - Powerful
 - You know when `Done()` and stop your job
 - Binding value
-- But be careful of context binding chain
+
+---
+
+### But be careful
 
 ```go
 ctx, cancel := context.WithTimeout(parentCtx, time.Second)
@@ -248,7 +253,7 @@ func DoSomething(ctx context.Context) {
     time.Sleep(2 * time.Second)
     myCtx, cancel := ctx.WithCancel(ctx)
 
-    doOtherThing(myCtx) /* `myCtx` is cancelled 
+    doOtherThing(myCtx) /* `myCtx` is cancelled
                             due to timeout of `ctx` */
 }
 ```
