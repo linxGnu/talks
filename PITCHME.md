@@ -76,7 +76,7 @@ storage.Store(data)                        // Save
 
 ---
 
-###  @color[#607625](Cons)
+###  @color[#607625](COW - Cons)
 
 - Memory allocation - GC stress
 - @color[red](Copy) is not @color[red](zero-cost)
