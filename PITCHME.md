@@ -371,5 +371,4 @@ sys	0m0.168s
 
 ---
 
-## Found interesting?
-### Join us!!
+## Found interesting? Join us!!
