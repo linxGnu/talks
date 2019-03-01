@@ -1,6 +1,6 @@
 theme : black
 
-logo : assets/img/logo.png
+logo : logo_linego20190301.png
 logo-postion : top-left
 
 title : "Efficient concurrency in Go"
