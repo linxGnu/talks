@@ -1,4 +1,4 @@
-### Efficient concurrency in Go
+### @color[#607625](Efficient concurrency in Go)
 
 Tran Tuan Linh @ LINE Corp
 
@@ -221,7 +221,6 @@ func acquireLockAndDoSomething() {
 ### `sync.Map`
 
 - Fast for many cases, but not all
-- Use it wisely !!
 - Better trying other lock-free, thread-safe data structures
 
 ---
