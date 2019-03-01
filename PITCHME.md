@@ -6,20 +6,20 @@ linxGnu @ github
 
 ---
 
-## Overview
+## @color[#607625](Overview)
 
 - Writing high intensive read/write metrics database
 - 40-80 Billion data points / day (and more)
 
 ---
 
-### Decision
+###  @color[#607625](Decision)
 
 In-memory, In-Go
 
 ---
 
-### Why Go
+###  @color[#607625](Why Go)
 
 - Simple
 - Fast
@@ -32,14 +32,14 @@ In-memory, In-Go
 
 ---
 
-### Processing approach
+###  @color[#607625](Processing approach)
 
 - Share nothing on write
 - On-demand Copy-on-write
 
 ---
 
-### Share nothing on write
+###  @color[#607625](Share nothing on write)
 
 - No write contention <!-- .element: class="fragment fade-up" -->
 - No lock/mutex, less context switching <!-- .element: class="fragment fade-up" -->
@@ -49,16 +49,16 @@ In-memory, In-Go
 
 ---
 
-### Copy-on-write
+###  @color[#607625](Copy-on-write)
 
-- We still have `"Query"` (many requests at a time)
-- `COW` is a good way to deal with `consistency`
+- We still have  @color[red](Query) (many requests at a time)
+- @color[red](COW) is a good way to deal with @color[red](consistency)
 
-`+ Share-nothing == Awesome`<!-- .element: class="fragment fade-up" -->
+<em>+ Share-nothing == Awesome</em><!-- .element: class="fragment fade-up" -->
 
 ---
 
-### Single write - multiple read
+###  @color[#607625](Single write - multiple read)
 
 ```go
 // Thread safe multi reading
@@ -74,17 +74,17 @@ storage.Store(data)                        // Save
 
 ---
 
-### Cons
+###  @color[#607625](Cons)
 
 - Memory allocation - GC stress
-- `Copy` is not `zero-cost`
-- When `Write >> Read` workload ?
+- @color[red](Copy) is not @color[red](zero-cost)
+- When @color[red](Write >> Read) workload ?
 
 => Let's improve it! <!-- .element: class="fragment fade-up" -->
 
 ---
 
-### On-demand COW
+###  @color[#607625](On-demand COW)
 
 - Special `sync.RWMutex`
 - Lockless
@@ -97,7 +97,7 @@ storage.Store(data)                        // Save
 
 ---
 
-## So far
+##  @color[#607625](So far)
 
 - Go help us writing systems in very productivity
 - Just code -> `go run` -> `sleep well`
@@ -105,14 +105,14 @@ storage.Store(data)                        // Save
 
 ---
 
-### Things not in heaven
+###  @color[#607625](Things not in heaven)
 
 ---
 
-### Channel
+###  @color[#607625](Channel)
 
 - Awesome
-- But slow when pushing `million` points through
+- But slow when pushing @color[red](millions) messages through
 
 ---
 
@@ -132,7 +132,7 @@ sys	1m24.319s
 
 ---
 
-### Make it better
+###  @color[#607625](Make it better)
 
 - Buffering at each layer of pipeline <!-- .element: class="fragment fade-up" -->
 - Send a slice instead of single point <!-- .element: class="fragment fade-up" -->
@@ -155,16 +155,18 @@ sys	0m25.084s
 
 ---
 
-## 6-7x faster! 
+##  @color[#607625](6-7x faster!)
 ### But why?
 
 ---
 
-<img src="https://gyazo.linecorp.com/images/190228/6c050cfb005128d74d42e2e723d161c5.png" style="height:600px" />
+###  @color[#607625](pprof is awesome!)
+
+<img src="https://gyazo.linecorp.com/images/190228/6c050cfb005128d74d42e2e723d161c5.png" style="height:550px" />
 
 ---
 
-### `sync/atomic`
+###  @color[#607625](sync/atomic)
 
 - Highly recommend
 - Fast
@@ -185,9 +187,9 @@ c = core.Config.Load().(*model.Config)
 
 ---
 
-### `sync/atomic`
+###  @color[#607625](sync/atomic)
 
-But use it carefully or you will be spin-lock forever!
+Use it carefully or you will be spin-lock forever!
 
 ```go
 func acquireLockAndDoSomething() {
@@ -207,7 +209,7 @@ func acquireLockAndDoSomething() {
 
 ---
 
-### Defer
+###  @color[#607625](Defer)
 
 - Adding overhead to your runtime and stack
 - `Nanosecond != zero` <!-- .element: class="fragment highlight-red" -->
@@ -218,21 +220,21 @@ func acquireLockAndDoSomething() {
 
 ---
 
-### `sync.Map`
+###  @color[#607625](sync.Map)
 
 - Fast for many cases, but not all
 - Better trying other lock-free, thread-safe data structures
 
 ---
 
-### Example of replacing `sync.Map`
+###  @color[#607625](Try replacing)
 
 - We create our own `int64` set based on: https://github.com/brentp/intintmap
-- We `manually` shards the map and `share-nothing` approach
+- We @color[red](manually) shards the map and apply @color[red](share-nothing) approach
 
 ---
 
-### `context.Context`
+###  @color[#607625](context.Context)
 
 - Powerful
 - You know when `Done()` and stop your job
@@ -240,7 +242,7 @@ func acquireLockAndDoSomething() {
 
 ---
 
-### But be careful
+###  @color[#607625](But be careful)
 
 ```go
 ctx, cancel := context.WithTimeout(parentCtx, time.Second)
@@ -259,16 +261,16 @@ func DoSomething(ctx context.Context) {
 
 ---
 
-### `context.Context`
+###  @color[#607625](context.Context)
 
-- Understand what you are doing with `ctx`
+- Understand what you are doing with @color[red](ctx)
 - Control its scope
 
-Then you have an awesome friend!<!-- .element: class="fragment fade-up" -->
+Then feel the great!<!-- .element: class="fragment fade-up" -->
 
 ---
 
-### `Data race`
+###  @color[#607625](Data race)
 
 - Evil
 - Causing unpredictable situation and data inconsistent
@@ -279,7 +281,7 @@ Then you have an awesome friend!<!-- .element: class="fragment fade-up" -->
 
 ---
 
-```bash
+```elm
 go run race.go
 panic: runtime error: invalid memory address or nil pointer dereference
 [signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x1098e6a]
@@ -298,11 +300,11 @@ sys	0m0.168s
 
 ---
 
-#### Only test help you
+####  @color[#607625](Only test help you)
 
-- Run test with "-race"<!-- .element: class="fragment fade-up" -->
+- Run test with @color[red](-race)<!-- .element: class="fragment fade-up" -->
 - Stress test with concurrent read-write<!-- .element: class="fragment fade-up" -->
-- Don't enable "-race" on production<!-- .element: class="fragment fade-up" -->
+- Avoid enabling @color[red](-race) on production<!-- .element: class="fragment fade-up" -->
 
 ---
 
@@ -310,7 +312,7 @@ sys	0m0.168s
 
 ---
 
-### Show case
+###  @color[#607625](Show case)
 
 <img src="https://gyazo.linecorp.com/images/190228/41b1b8a665a37f162b129810d8b958fa.png" />
 
