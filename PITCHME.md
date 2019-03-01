@@ -230,10 +230,60 @@ func acquireLockAndDoSomething() {
 
 ---
 
-###  @color[#607625](Try replacing)
+###  @color[#607625](Replacing)
 
 - We create our own `int64` set based on: https://github.com/brentp/intintmap
 - We @color[red](manually) shards the map and apply @color[red](share-nothing) approach
+- 2-5x faster than `map`
+- Tiny alloc
+- We also see great improvement when using `int64 set + manual shard` compared to `sync.Map`
+
+---
+
+### @color[#607625](Benchmark)
+
+```go
+func benchmarkMapSet(b *testing.B, set []int64) {
+	for i := 0; i < b.N; i++ {
+		s := make(map[int64]struct{})
+
+		var exist bool
+		for _, v := range set {
+			if _, exist = s[v]; !exist {
+				s[v] = struct{}{}
+			}
+		}
+	}
+}
+
+func benchmarkIntSet(b *testing.B, set []int64) {
+	for i := 0; i < b.N; i++ {
+		s, _ := iset.New(128, 0.8)
+		for _, v := range set {
+			if !s.Exist(v) {
+				s.Put(v)
+			}
+		}
+	}
+}
+```
+
+---
+
+### @color[#607625](Benchmark)
+
+```elm
+go1.12
+goos: darwin
+goarch: amd64
+pkg: git.linecorp.com/LINE-DevOps/imon-flash.git/benchmarks/go/intset
+BenchmarkIntsetSmall-8    	   50000	     22666 ns/op	   65616 B/op	       4 allocs/op
+BenchmarkIntsetMedium-8   	       5	 204731605 ns/op	201293923 B/op	      26 allocs/op
+BenchmarkIntsetLarge-8    	       1	1241928873 ns/op	805273680 B/op	      30 allocs/op
+BenchmarkMapsetSmall-8    	   20000	    103981 ns/op	   47813 B/op	      66 allocs/op
+BenchmarkMapsetMedium-8   	       3	 411189933 ns/op	99879104 B/op	   76652 allocs/op
+BenchmarkMapsetLarge-8    	       1	2220622562 ns/op	403991096 B/op	  306845 allocs/op
+```
 
 ---
 
