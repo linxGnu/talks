@@ -107,8 +107,8 @@ storage.Store(data)                        // Save
 
 ---
 
-##  @color[#607625](Things not in heaven)
-### Story of optimization
+###  @color[#607625](Things not in heaven)
+#### Story of optimization
 
 ---
 
