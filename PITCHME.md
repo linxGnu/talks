@@ -355,13 +355,13 @@ sys	0m0.168s
 
 ####  @color[#607625](Only test help you)
 
-- Run test with @color[red](-race)<!-- .element: class="fragment fade-up" -->
-- Stress test with concurrent read-write<!-- .element: class="fragment fade-up" -->
-- Avoid enabling @color[red](-race) on production<!-- .element: class="fragment fade-up" -->
+- Run test with @color[red](-race)
+- Avoid enabling @color[red](-race) on production
+- Never forget to stress test with concurrent read-write<!-- .element: class="fragment highlight-red" -->
 
 ---
 
-# .... many others
+## .... many others
 
 ---
 
