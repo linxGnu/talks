@@ -136,7 +136,7 @@ sys	1m24.319s
 - Buffering at each layer of pipeline <!-- .element: class="fragment fade-up" -->
 - Send a slice instead of single point <!-- .element: class="fragment fade-up" -->
 
----?code=asset/code/batch.go&lang=golang&title=Batching
+---?code=asset/code/batch_chan.go&lang=golang&title=Batching
 
 ---
 
