@@ -1,6 +1,6 @@
 theme : black
 
-logo : logo_linego20190301.png
+logo : asset/img/logo_linego20190301.png
 logo-postion : top-left
 
 highlight : atom-one-dark

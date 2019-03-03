@@ -95,7 +95,7 @@ storage.Store(data)                        // Save
 
 ---
 
-<img src="https://gyazo.linecorp.com/images/190226/a50019ba32e8f2cccb2f9182989cdffd.png" style="height:600px"/>
+---?code=asset/code/chan.go&lang=golang&title=Channel
 
 ---
 
