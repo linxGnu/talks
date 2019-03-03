@@ -3,7 +3,6 @@ theme : black
 logo : asset/img/logo_linego20190301.png
 logo-postion : top-left
 
-code-line-numbers : true
 highlight : atom-one-dark
 
 title : "Efficient concurrency in Go"
