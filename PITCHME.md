@@ -93,7 +93,7 @@ storage.Store(data)                        // Save
 - Lightweight
 - x3-x10 performance gain!
 
----?code=asset/code/chan.go&lang=golang&title=Channel
+---?code=asset/code/on-demand-cow.go&lang=golang&title=On-demand COW
 
 ---
 
@@ -115,9 +115,7 @@ storage.Store(data)                        // Save
 - Awesome
 - But slow when pushing @color[red](millions) messages through
 
----
-
-<img src="https://gyazo.linecorp.com/images/190228/77dd180f88867a55ddbd649dee8a1220.png" style="height:600px" />
+---?code=asset/code/chan.go&lang=golang&title=Channel
 
 ---
 
@@ -138,9 +136,7 @@ sys	1m24.319s
 - Buffering at each layer of pipeline <!-- .element: class="fragment fade-up" -->
 - Send a slice instead of single point <!-- .element: class="fragment fade-up" -->
 
----
-
-<img src="https://gyazo.linecorp.com/images/190228/213a49a3f229d90bd5a99ca6133af84d.png" style="height:600px" />
+---?code=asset/code/batch.go&lang=golang&title=Batching
 
 ---
 
@@ -163,7 +159,13 @@ sys	0m25.084s
 
 ###  @color[#607625](pprof is awesome!)
 
-<img src="https://gyazo.linecorp.com/images/190228/6c050cfb005128d74d42e2e723d161c5.png" style="height:550px" />
+@snap[west]
+![Channel](asset/img/profile_chan.png)
+@snapend
+
+@snap[east]
+![Batch](asset/img/profile_batch.png)
+@snapend
 
 ---
 
@@ -326,9 +328,7 @@ Then feel the great!<!-- .element: class="fragment fade-up" -->
 - Evil
 - Causing unpredictable situation and data inconsistent
 
----
-
-<img src="https://gyazo.linecorp.com/images/190228/f16c841b9120fef8c5b7258c01c9c910.png" style="height:600px" />
+---?code=asset/code/race.go&lang=golang&title=Data race
 
 ---
 
@@ -360,12 +360,6 @@ sys	0m0.168s
 ---
 
 ## .... many others
-
----
-
-###  @color[#607625](Show case)
-
-<img src="https://gyazo.linecorp.com/images/190228/41b1b8a665a37f162b129810d8b958fa.png" />
 
 ---
 
