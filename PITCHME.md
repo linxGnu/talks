@@ -160,11 +160,11 @@ sys	0m25.084s
 ###  @color[#607625](pprof is awesome!)
 
 @snap[west]
----?image=asset/img/profile_chan.png&size=contain&title=Channel
+---?image=asset/img/profile_chan.png&size=auto 20%&title=Channel
 @snapend
 
 @snap[east]
----?image=asset/img/profile_batch.png&size=contain&title=Batching
+---?image=asset/img/profile_batch.png&size=auto 20%&title=Batching
 @snapend
 
 ---
