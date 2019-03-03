@@ -157,13 +157,13 @@ sys	0m25.084s
 
 ---
 
-###  @color[#607625](pprof)
+####  @color[#607625](pprof - Channel)
 
 ![Channel](asset/img/profile_chan.png)
 
 ---
 
-###  @color[#607625](pprof)
+####  @color[#607625](pprof - Batching)
 
 ![Batching](asset/img/profile_batch.png)
 
