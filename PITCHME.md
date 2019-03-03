@@ -93,8 +93,6 @@ storage.Store(data)                        // Save
 - Lightweight
 - x3-x10 performance gain!
 
----
-
 ---?code=asset/code/chan.go&lang=golang&title=Channel
 
 ---
